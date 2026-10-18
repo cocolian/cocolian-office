@@ -29,5 +29,15 @@ for item in json.loads((root/'repos.json').read_text()):
     if subprocess.run(['git','-C',str(repo),'show-ref','--verify','--quiet',ref]).returncode:
         git('fetch','--depth','1','origin',item['branch']+':'+ref)
     git('branch','--set-upstream-to','origin/'+item['branch'])
+    if item.get('base_branch'):
+        base_ref='refs/remotes/origin/'+item['base_branch']
+        git('fetch','--depth','1','--filter=blob:none','origin',item['base_branch']+':'+base_ref)
+        baseline=item['base_commit']
+        # Pin the server's build baseline even if the remote main branch advances.
+        if subprocess.run(['git','-C',str(repo),'cat-file','-e',baseline+'^{commit}']).returncode:
+            git('fetch','--depth','1','--filter=blob:none','origin',baseline)
+        for branch in ('main','feature/notebookbar-icon-tooltips','feature/zh-cn-toolbar'):
+            if subprocess.run(['git','-C',str(repo),'show-ref','--verify','--quiet','refs/heads/'+branch]).returncode:
+                git('branch',branch,baseline)
     print(item['name'],head)
 PYTHON
