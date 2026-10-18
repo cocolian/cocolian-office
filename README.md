@@ -59,4 +59,6 @@ cd cocolian-office
 ./scripts/setup-dev.sh
 ```
 
-`repos.json` 和 Git submodule 记录迁移时的精确提交；setup-dev.sh 只初始化这三个源码仓库，不递归下载引擎内部的附加子模块。首次使用完整检出源码、按需拉取历史文件内容的 partial clone。源码构建仍需 Linux 环境；Mac 用于编辑、提交和本地可用的验证。构建镜像、缓存、凭据和运行数据不随源码迁移。原服务器工作目录保留。
+`repos.json` 和 Git submodule 记录迁移时的精确提交；setup-dev.sh 只初始化这三个源码仓库，不递归下载引擎内部的附加子模块。首次完整检出锁定版本源码，并使用浅克隆减少历史下载；需要完整历史时在对应源码仓库执行 `git fetch --unshallow origin`。源码构建仍需 Linux 环境；Mac 用于编辑、提交和本地可用的验证。构建镜像、缓存、凭据和运行数据不随源码迁移。原服务器工作目录保留。
+
+中文翻译源码另用 `./scripts/setup-translations.sh` 恢复到引擎的 `engine/translations`（上游提交 `17fb3698d5e86169d44076f7a992c572f8f780f1`，仅检出 `source/zh-CN`）。服务器的两份未提交翻译修改已逐字核对，与已提交补丁 `patches/translations/zh-cn-native-commands.patch` 完全一致；恢复后在翻译仓库中显示为修改，这是补丁的预期状态。该官方仓库的推送已禁用。

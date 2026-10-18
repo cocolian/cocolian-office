@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
-git -C "$root" submodule update --init --filter=blob:none
+git -C "$root" submodule update --init --depth 1 --filter=blob:none
 python3 - "$root" <<'PYTHON'
 import json, subprocess, sys
 from pathlib import Path
@@ -25,6 +25,9 @@ for item in json.loads((root/'repos.json').read_text()):
         raise SystemExit(f"Existing branch diverges: {repo} {item['branch']}")
     if exists: git('switch',item['branch'])
     else: git('switch','-c',item['branch'])
+    ref='refs/remotes/origin/'+item['branch']
+    if subprocess.run(['git','-C',str(repo),'show-ref','--verify','--quiet',ref]).returncode:
+        git('fetch','--depth','1','origin',item['branch']+':'+ref)
     git('branch','--set-upstream-to','origin/'+item['branch'])
     print(item['name'],head)
 PYTHON
