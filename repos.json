@@ -1,0 +1,23 @@
+[
+  {
+    "name": "office-core",
+    "origin": "https://github.com/cocolian/office-core.git",
+    "upstream": "https://github.com/LibreOffice/core.git",
+    "branch": "master",
+    "commit": "5bfb3d0561c328a04b5cbac019d393a1fe174482"
+  },
+  {
+    "name": "online.mirror",
+    "origin": "https://github.com/cocolian/online.mirror.git",
+    "upstream": "https://github.com/CollaboraOnline/online.mirror.git",
+    "branch": "office-ui-20261017",
+    "commit": "473ad9ccd7bb6cafa28a97e159b23a3b386c73a5"
+  },
+  {
+    "name": "collabora-online-sdk-examples",
+    "origin": "https://github.com/cocolian/collabora-online-sdk-examples.git",
+    "upstream": "https://github.com/CollaboraOnline/collabora-online-sdk-examples.git",
+    "branch": "master",
+    "commit": "dc55f596ec9bad460a2aac46eafac658b945e9e7"
+  }
+]

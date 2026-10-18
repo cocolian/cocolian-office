@@ -1,0 +1,12 @@
+[submodule "office-core"]
+	path = src/office-core
+	url = https://github.com/cocolian/office-core.git
+	branch = master
+[submodule "online.mirror"]
+	path = src/online.mirror
+	url = https://github.com/cocolian/online.mirror.git
+	branch = office-ui-20261017
+[submodule "collabora-online-sdk-examples"]
+	path = src/collabora-online-sdk-examples
+	url = https://github.com/cocolian/collabora-online-sdk-examples.git
+	branch = master
