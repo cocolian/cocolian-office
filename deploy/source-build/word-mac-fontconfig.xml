@@ -5,27 +5,6 @@
   <include>/etc/fonts/fonts.conf</include>
   <dir>/usr/local/share/fonts/word-mac</dir>
   <cachedir>/var/cache/fontconfig</cachedir>
-  <selectfont>
-    <rejectfont>
-      <glob>*/仿宋_GB2312.ttf</glob>
-    </rejectfont>
-  </selectfont>
-  <match target="pattern">
-    <test name="family" compare="eq">
-      <string>仿宋_GB2312</string>
-    </test>
-    <edit name="family" mode="assign" binding="strong">
-      <string>Microsoft YaHei</string>
-    </edit>
-  </match>
-  <match target="pattern">
-    <test name="family" compare="eq">
-      <string>FangSong_GB2312</string>
-    </test>
-    <edit name="family" mode="assign" binding="strong">
-      <string>Microsoft YaHei</string>
-    </edit>
-  </match>
   <match target="pattern">
     <test name="family" compare="eq">
       <string>方正小标宋简体</string>
