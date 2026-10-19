@@ -18,3 +18,13 @@
 - 推送到现有私有 registry，以实际校验过的 SHA256 更新 Deployment。保留旧 Deployment、ConfigMap、文档卷备份及 JSON Patch 回滚文件。
 
 参考样本从原先 24 页恢复为 22 页，字体、表格行距、首行缩进和页码位置得到修复。仍存在部分正文换行、字距和跨页文字位置差异，不能据此宣称与 Word 逐像素一致。中文标点压缩设置的通用导入实现未纳入本次变更，因为实际对比会进一步偏离 Mac Word 参考。
+
+## 2026-10-20 编辑辅助标记
+
+`EditorAids.Dockerfile` 在默认服务和 Word Mac 服务上分别增量打包：
+
+- `editor-aids.xcd` 将 Writer `Content/Display/ShowBoundaries` 默认关闭，隐藏页码文本框等非打印辅助边界，不修改文档边框。
+- `editor-aids.css` 让表格行列选择和调整按钮仅在悬停时可见，保留事件命中区域及编辑功能。
+- HTML 引用新的独立 CSS URL，避免沿用原 bundle.css 缓存。引擎排版库与文档不修改。
+
+构建传入匹配的已发布基础镜像，两个新镜像均经私有 registry 发布并使用不可变摘要。需要文档重新加载，已打开的编辑会话继续使用原视图设置，直到重连。

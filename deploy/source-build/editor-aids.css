@@ -1,0 +1,15 @@
+/* Keep Writer's row/column selectors available without drawing them over text. */
+.table-select-marker,
+.table-column-resize-marker,
+.table-row-resize-marker {
+    opacity: 0;
+}
+.table-select-marker:hover,
+.table-select-marker.hovered,
+.table-select-marker:focus-visible,
+.table-column-resize-marker:hover,
+.table-column-resize-marker.hovered,
+.table-row-resize-marker:hover,
+.table-row-resize-marker.hovered {
+    opacity: 1;
+}

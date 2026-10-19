@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:data xmlns:oor="http://openoffice.org/2001/registry">
+  <dependency file="writer"/>
+  <oor:component-data oor:package="org.openoffice.Office" oor:name="Writer">
+    <node oor:name="Content">
+      <node oor:name="Display">
+        <prop oor:name="ShowBoundaries" oor:op="fuse"><value>false</value></prop>
+      </node>
+    </node>
+  </oor:component-data>
+</oor:data>
