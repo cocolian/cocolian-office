@@ -5,7 +5,7 @@
 [submodule "online.mirror"]
 	path = src/online.mirror
 	url = https://github.com/cocolian/online.mirror.git
-	branch = office-ui-20261017
+	branch = main
 [submodule "collabora-online-sdk-examples"]
 	path = src/collabora-online-sdk-examples
 	url = https://github.com/cocolian/collabora-online-sdk-examples.git

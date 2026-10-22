@@ -10,8 +10,8 @@
     "name": "online.mirror",
     "origin": "https://github.com/cocolian/online.mirror.git",
     "upstream": "https://github.com/CollaboraOnline/online.mirror.git",
-    "branch": "office-ui-20261017",
-    "commit": "473ad9ccd7bb6cafa28a97e159b23a3b386c73a5",
+    "branch": "main",
+    "commit": "3cfcafe25949ddc8ba6c1b4bba8c6e51b64cd7ab",
     "base_branch": "main",
     "base_commit": "9e69ab148514e32237529dd9fec8c796445b3dcc"
   },
