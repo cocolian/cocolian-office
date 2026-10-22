@@ -1,6 +1,5 @@
-<?xml version="1.0" ?>
-<!DOCTYPE fontconfig
-  SYSTEM 'urn:fontconfig:fonts.dtd'>
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
 <fontconfig>
   <include>/etc/fonts/fonts.conf</include>
   <dir>/usr/local/share/fonts/word-mac</dir>
@@ -21,4 +20,34 @@
       <string>Microsoft YaHei</string>
     </edit>
   </match>
-</fontconfig>
+  <!-- Matches the fallback observed in Mac Word's reference PDFs. -->
+  <match target="pattern">
+    <test name="family" compare="eq"><string>方正小标宋_GBK</string></test>
+    <edit name="family" mode="assign" binding="strong"><string>Microsoft YaHei</string></edit>
+  </match>
+  <!-- Matches the fallback observed in Mac Word's reference PDFs. -->
+  <match target="pattern">
+    <test name="family" compare="eq"><string>方正黑体_GBK</string></test>
+    <edit name="family" mode="assign" binding="strong"><string>Microsoft YaHei</string></edit>
+  </match>
+  <!-- Matches the fallback observed in Mac Word's reference PDFs. -->
+  <match target="pattern">
+    <test name="family" compare="eq"><string>方正黑体简体</string></test>
+    <edit name="family" mode="assign" binding="strong"><string>Microsoft YaHei</string></edit>
+  </match>
+  <!-- Matches the fallback observed in Mac Word's reference PDFs. -->
+  <match target="pattern">
+    <test name="family" compare="eq"><string>方正楷体_GBK</string></test>
+    <edit name="family" mode="assign" binding="strong"><string>Microsoft YaHei</string></edit>
+  </match>
+  <!-- Matches the fallback observed in Mac Word's reference PDFs. -->
+  <match target="pattern">
+    <test name="family" compare="eq"><string>方正楷体简体</string></test>
+    <edit name="family" mode="assign" binding="strong"><string>Microsoft YaHei</string></edit>
+  </match>
+  <!-- Matches the fallback observed in Mac Word's reference PDFs. -->
+  <match target="pattern">
+    <test name="family" compare="eq"><string>方正仿宋_GBK</string></test>
+    <edit name="family" mode="assign" binding="strong"><string>Microsoft YaHei</string></edit>
+  </match>
+<match target="pattern"><test name="family" compare="eq"><string>文星仿宋</string></test><edit name="family" mode="assign" binding="strong"><string>Microsoft YaHei</string></edit></match><match target="pattern"><test name="family" compare="eq"><string>文星标宋</string></test><edit name="family" mode="assign" binding="strong"><string>Microsoft YaHei</string></edit></match><match target="pattern"><test name="family" compare="eq"><string>文星楷体</string></test><edit name="family" mode="assign" binding="strong"><string>Microsoft YaHei</string></edit></match><match target="pattern"><test name="family" compare="eq"><string>文星黑体</string></test><edit name="family" mode="assign" binding="strong"><string>Microsoft YaHei</string></edit></match><match target="pattern"><test name="family" compare="eq"><string>CESI宋体-GB2312</string></test><edit name="family" mode="assign" binding="strong"><string>Microsoft YaHei</string></edit></match><match target="pattern"><test name="family" compare="eq"><string>方正书宋_GBK</string></test><edit name="family" mode="assign" binding="strong"><string>Microsoft YaHei</string></edit></match></fontconfig>
