@@ -6,7 +6,7 @@ COPY program/ /opt/collaboraoffice/program/
 # Supplied locally from the licensed desktop installation; never committed.
 COPY fonts/ /usr/local/share/fonts/word-mac/
 COPY word-mac-fontconfig.xml /etc/fonts/word-mac-fontconfig.xml
-ENV FONTCONFIG_FILE=/etc/fonts/word-mac-fontconfig.xml COCOLIAN_WORD_MAC_METRICS=1
+ENV FONTCONFIG_FILE=/etc/fonts/word-mac-fontconfig.xml COCOLIAN_WORD_MAC_METRICS=1 COCOLIAN_WORD_MAC_CLASSIC_METRICS=1 COCOLIAN_WORD_MAC_AUTOFIT=1 COCOLIAN_WORD_MAC_GRID_BOTTOM=1 COCOLIAN_WORD_MAC_FLEX_SCRIPT_GAPS=1 COCOLIAN_WORD_MAC_LINE_BUDGET=1
 RUN fc-cache -f && coolwsd-systemplate-setup /opt/cool/systemplate /opt/collaboraoffice && \
     chown -R 1001:1001 /opt/cool/systemplate
 USER 1001:1001
