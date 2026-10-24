@@ -26,7 +26,13 @@ The renderer also enables `COCOLIAN_WORD_MAC_FLEX_SCRIPT_GAPS=1` and
 
 `COCOLIAN_WORD_MAC_CLASSIC_METRICS=1` uses measured Mac Word line metrics for
 SimSun, SimHei, FangSong and KaiTi, and measured leading for YaHei/DengXian.
-The engine pipeline runs 27 bundled-font regressions and 22 native-font
+The engine pipeline runs 28 bundled-font regressions and 23 native-font
 regressions before packaging. The private 15-document/229-page corpus includes
 page geometry and visual comparisons; page-count agreement is not full visual
 acceptance, and remaining differences stay in local reports.
+
+The renderer preserves explicit OOXML `wordWrap` values on paragraphs and styles.
+The Mac profile permits character-level ASCII wrapping when the value is false.
+Decimal and percentage tokens retain their closing CJK punctuation fit allowance.
+Generated regressions verify namespaced DOCX export and save/reload inheritance;
+private sample documents and fonts remain outside Git.
