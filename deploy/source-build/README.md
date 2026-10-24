@@ -26,7 +26,7 @@ The renderer also enables `COCOLIAN_WORD_MAC_FLEX_SCRIPT_GAPS=1` and
 
 `COCOLIAN_WORD_MAC_CLASSIC_METRICS=1` uses measured Mac Word line metrics for
 SimSun, SimHei, FangSong and KaiTi, and measured leading for YaHei/DengXian.
-The engine pipeline runs 29 bundled-font regressions and 23 native-font
+The engine pipeline runs 30 bundled-font regressions and 23 native-font
 regressions before packaging. The private 15-document/229-page corpus includes
 page geometry and visual comparisons; page-count agreement is not full visual
 acceptance, and remaining differences stay in local reports.
@@ -42,3 +42,10 @@ uniform positive spacing on flat, top-level, non-floating tables without merged
 rows. Generated cases cover zero spacing, merged-row fallback, disabled-profile
 behavior and namespaced DOCX save/reload. This does not add table-level default
 spacing support or establish full visual corpus acceptance.
+
+The Mac profile keeps an ASCII HTTP(S) path tail together after a hyphen when
+the complete tail fits the next line. Explicit `wordWrap=false` still uses
+character-level wrapping, including underscores in identifiers. The generated
+`testWordMacUrlBreakUnits` covers plain text and HYPERLINK fields, legacy and Mac
+profiles, long-tail fallback, and DOCX save/reload with reserved example.invalid
+addresses. Private sample documents and font binaries remain outside Git.
