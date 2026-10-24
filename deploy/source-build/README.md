@@ -26,7 +26,7 @@ The renderer also enables `COCOLIAN_WORD_MAC_FLEX_SCRIPT_GAPS=1` and
 
 `COCOLIAN_WORD_MAC_CLASSIC_METRICS=1` uses measured Mac Word line metrics for
 SimSun, SimHei, FangSong and KaiTi, and measured leading for YaHei/DengXian.
-The engine pipeline runs 22 bundled-font regressions and 14 native-font
+The engine pipeline runs 27 bundled-font regressions and 20 native-font
 regressions before packaging. The private 15-document/229-page corpus includes
 page geometry and visual comparisons; page-count agreement is not full visual
 acceptance, and remaining differences stay in local reports.
