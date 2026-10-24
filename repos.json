@@ -11,7 +11,7 @@
     "origin": "https://github.com/cocolian/online.mirror.git",
     "upstream": "https://github.com/CollaboraOnline/online.mirror.git",
     "branch": "main",
-    "commit": "4de834da9995f139d0436a1e1e23ed3a0ec8d557",
+    "commit": "374d58e5e2ddbd72c7f16db6abf5018400004317",
     "base_branch": "main",
     "base_commit": "9e69ab148514e32237529dd9fec8c796445b3dcc"
   },
