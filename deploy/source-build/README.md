@@ -15,7 +15,7 @@ pins the four Arial faces and Wingdings 2 from the installed Mac Word resources.
 Native GB2312 families remain intact. The corpus is not visually accepted yet;
 the individual renderer repairs are tested separately from full corpus acceptance.
 
-The shared profile pins 38 private font files, with native Aptos/Segoe UI faces,
+The shared profile pins 41 private font files, with native Aptos/Segoe UI faces,
 Helvetica, Menlo, Wingdings and Apple Color Emoji fallback. No binaries or sample
 documents belong in Git. All three deployed renderers use this same profile.
 The pipeline additionally enables `COCOLIAN_WORD_MAC_AUTOFIT=1` and
@@ -26,7 +26,7 @@ The renderer also enables `COCOLIAN_WORD_MAC_FLEX_SCRIPT_GAPS=1` and
 
 `COCOLIAN_WORD_MAC_CLASSIC_METRICS=1` uses measured Mac Word line metrics for
 SimSun, SimHei, FangSong and KaiTi, and measured leading for YaHei/DengXian.
-The engine pipeline runs 30 bundled-font regressions and 23 native-font
+The engine pipeline runs 30 bundled-font regressions and 26 native-font
 regressions before packaging. The private 15-document/229-page corpus includes
 page geometry and visual comparisons; page-count agreement is not full visual
 acceptance, and remaining differences stay in local reports.
@@ -49,3 +49,24 @@ character-level wrapping, including underscores in identifiers. The generated
 `testWordMacUrlBreakUnits` covers plain text and HYPERLINK fields, legacy and Mac
 profiles, long-tail fallback, and DOCX save/reload with reserved example.invalid
 addresses. Private sample documents and font binaries remain outside Git.
+
+Left-aligned table text snapped to a strict line grid now obeys the Word 2013
+punctuation setting, including whole-portion fitting before line breaking.
+`testWordMacStrictGridTablePunctuation` checks the enabled/disabled setting
+and DOCX save/reload with pinned Segoe UI and SimSun fonts.
+The private font pack additionally pins native Courier New and Tahoma faces.
+Missing Chinese Tahoma glyphs prefer SimSun; missing FangSong_GB2312 glyphs
+prefer Courier New. Installed primary faces remain first in the pattern.
+Font binaries and sample documents remain outside Git.
+
+In the Mac profile, PDF export selects artificial bold for each actual glyph
+font, including fallback faces. A native bold primary face no longer suppresses
+needed synthesis on its fallback, and native bold fallback glyphs avoid a
+second stroke. The generated `testWordMacPdfFallbackBold` checks mixed Latin/CJK
+fonts, horizontal/vertical layout, outline text, and the unchanged default profile.
+
+Cached body-grid paragraphs rebuild their position-dependent line heights when
+they move. Fitting and remaining-height accounting use the same lower-leading
+allowance. `testWordMacCachedGridBottom` checks backward movement after editing,
+nonnegative remaining space, and a visible-font-box overflow that must still
+break the page. Tables, floating frames, and the default profile are excluded.

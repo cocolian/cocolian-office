@@ -174,4 +174,29 @@
       <string>Apple Color Emoji</string>
     </edit>
   </match>
+  <!-- Word Mac missing-glyph fallback; retain each installed primary face. -->
+  <match target="pattern">
+    <test name="family" compare="eq" qual="first">
+      <string>Tahoma</string>
+    </test>
+    <edit name="family" mode="append" binding="strong">
+      <string>SimSun</string>
+    </edit>
+  </match>
+  <match target="pattern">
+    <test name="family" compare="eq" qual="first">
+      <string>FangSong_GB2312</string>
+    </test>
+    <edit name="family" mode="append" binding="strong">
+      <string>Courier New</string>
+    </edit>
+  </match>
+  <match target="pattern">
+    <test name="family" compare="eq" qual="first">
+      <string>仿宋_GB2312</string>
+    </test>
+    <edit name="family" mode="append" binding="strong">
+      <string>Courier New</string>
+    </edit>
+  </match>
 </fontconfig>
