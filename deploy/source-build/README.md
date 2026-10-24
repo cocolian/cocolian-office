@@ -26,7 +26,7 @@ The renderer also enables `COCOLIAN_WORD_MAC_FLEX_SCRIPT_GAPS=1` and
 
 `COCOLIAN_WORD_MAC_CLASSIC_METRICS=1` uses measured Mac Word line metrics for
 SimSun, SimHei, FangSong and KaiTi, and measured leading for YaHei/DengXian.
-The engine pipeline runs 30 bundled-font regressions and 26 native-font
+The engine pipeline runs 31 bundled-font regressions and 26 native-font
 regressions before packaging. The private 15-document/229-page corpus includes
 page geometry and visual comparisons; page-count agreement is not full visual
 acceptance, and remaining differences stay in local reports.
@@ -70,3 +70,10 @@ they move. Fitting and remaining-height accounting use the same lower-leading
 allowance. `testWordMacCachedGridBottom` checks backward movement after editing,
 nonnegative remaining space, and a visible-font-box overflow that must still
 break the page. Tables, floating frames, and the default profile are excluded.
+
+Top-level Mac-profile AutoFit tables stay within the page text width unless
+OOXML `growAutofit` explicitly permits margin overflow. That compatibility
+setting and the AutoFit layout mode survive DOCX save/reload. The generated
+`testWordMacAutoFitPageWidth` checks both settings through two save/reload cycles,
+including wrapping oversized content inside the page. Legacy-profile and fixed
+table behavior are unchanged. Private sample documents remain outside Git.
