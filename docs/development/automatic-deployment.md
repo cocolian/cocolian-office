@@ -13,3 +13,7 @@ build-host 约每分钟检查三个项目的 main；任何一个项目有新提�
 流程保留候选镜像检查、串行发布、失败回滚和 WOPI 保存/文档转换验证。
 
 [完整流程、日志和运维命令](https://github.com/cocolian/online.mirror/blob/main/cocolian/office-lab/scripts/devops/README.md)
+
+## 构建存储（2026-10-26）
+
+开发 VM 的系统磁盘由 200 GiB 在线扩展到 264 GiB，根分区和 ext4 文件系统同步扩展；分区起点、UUID 及其他分区保持不变，无需重启。发布仍要求至少 15 GiB 可用空间，并串行生成和清理镜像推送临时文件。原镜像、编译缓存和私有字体继续保留；已归档的旧构建产物在宿主机保存，并在释放 VM 副本前逐项校验 SHA256。
