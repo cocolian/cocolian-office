@@ -19,6 +19,11 @@
       <string>SimSun</string>
     </edit>
   </match>
+  <!-- Prefer the same emoji face as Mac Word; retain system fallbacks. -->
+  <match target="pattern">
+    <test name="family" compare="eq"><string>emoji</string></test>
+    <edit name="family" mode="prepend" binding="strong"><string>Apple Color Emoji</string></edit>
+  </match>
   <include>/etc/fonts/fonts.conf</include>
   <dir>/usr/local/share/fonts/word-mac</dir>
   <cachedir>/var/cache/fontconfig</cachedir>
@@ -198,5 +203,9 @@
     <edit name="family" mode="append" binding="strong">
       <string>Courier New</string>
     </edit>
+  </match>
+  <match target="pattern">
+    <test name="family" compare="eq"><string>Noto Color Emoji</string></test>
+    <edit name="family" mode="prepend" binding="strong"><string>Apple Color Emoji</string></edit>
   </match>
 </fontconfig>
