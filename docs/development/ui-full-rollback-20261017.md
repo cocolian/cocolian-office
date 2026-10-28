@@ -1,5 +1,8 @@
 # 2026-10-17 撤回标签栏与隐藏标题修改
 
+> 地址和目录均为通用示例，实际部署值应由自己的私有配置提供。
+
+
 按用户确认，撤回全部默认标签栏、隐藏图标标题和后续缓存版本修改，恢复这些 UI 改动前的界面；不是回退至最初 CODE 25.04 官方镜像。
 
 - Collabora 恢复 `registry.example.invalid/cocolian/collabora-source@sha256:e52c1ff4995d901f4ff62620f881aa6f4ecb64a5e108fac7f6fc5429497ba894`，版本 26.04.6.0，资源版本 19b4efae7f。

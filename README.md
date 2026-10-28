@@ -45,7 +45,7 @@ cd cocolian-office
 
 欢迎文档管理系统、知识库、业务平台和其他应用接入 Cocolian Office。可以通过 WOPI 对接文档打开、编辑与保存，也可以通过转换接口集成 DOCX 转 PDF。
 
-接入实现与接口说明见 [文档门户仓库](https://github.com/cocolian/cocolian)；现有在线入口为 [office.example.invalid](https://office.example.invalid/)，当前运行的是受控验证环境。欢迎通过项目仓库联系维护者，交流接入需求、部署方式和兼容性问题。
+接入实现与接口说明见 [文档门户仓库](https://github.com/cocolian/cocolian)。欢迎通过项目仓库联系维护者，交流接入需求、部署方式和兼容性问题。
 
 ## 参与贡献
 
