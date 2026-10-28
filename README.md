@@ -1,64 +1,70 @@
-# 国产开源在线文档中台开发工作区
+# Cocolian Office 国产化云文档中台
 
-本仓库保存中台开发资料，并以 Git submodule 锁定三个独立源码仓库。
+Cocolian Office 的目标是构建国产化的 LibreOffice，建设可自主构建、可私有部署的云文档中台，让中文文档在在线编辑、预览和 PDF 转换时，获得与 Microsoft Office Word 尽可能一致的渲染效果。
 
-## 源码
+项目基于 LibreOffice 和 Collabora Online 持续开发，重点改进中文字体、行距、换行、分页、表格和中英文混排。我们追求最佳的中文文档与 Word 渲染一致性，并以真实对照和回归测试逐项推进这一目标。
 
-| 目录 | Fork (origin) | 直接上游 (upstream) | 基线分支 |
-| --- | --- | --- | --- |
-| src/office-core | cocolian/office-core | LibreOffice/core | master |
-| src/online.mirror | cocolian/online.mirror | CollaboraOnline/online.mirror | office-ui-20261017 |
-| src/collabora-online-sdk-examples | cocolian/collabora-online-sdk-examples | CollaboraOnline/collabora-online-sdk-examples | master |
+**本项目开源，可按各组件许可证免费使用、部署和接入。欢迎参与开发，欢迎将项目接入你的产品，也欢迎捐款支持项目持续维护。**
 
-首次 Clone 使用 --filter=blob:none，保留完整提交历史，文件内容按需下载；首次 checkout 仍可能耗时较长。未执行源码构建或子模块初始化。仓库地址清单见 repos.json。
+## 项目能力
 
-## 目录职责
+- 在线文档编辑与协同，通过 WOPI 连接文档存储、鉴权及保存回调。
+- DOCX 预览与 PDF 转换，面向业务系统提供文档处理能力。
+- 中文排版兼容性改进，覆盖中文字体匹配、GB2312 和 GBK 字体、文档网格、段落行距、表格跨页及混排规则。
+- 从源码构建渲染引擎与在线服务，使用 Docker 镜像部署，并通过自动检查验证发布。
 
-- services/wopi：文档存储、鉴权、打开与保存回调服务。
-- services/wps-adapter：根据现有业务实际调用设计 WPS 兼容适配层。
-- deploy/compose：本地集成环境；deploy/k3s：远程 office-test 命名空间部署配置。
-- tests/fixtures：脱敏测试文档；integration：打开、编辑、保存及协同测试；compatibility：中文字体、分页、表格与 DOCX 转 PDF 测试。
-- docs/architecture、development、licensing：架构、开发及许可证核查资料。
-- build、artifacts：本地构建与测试产物；禁止提交凭据或真实业务文档。
+当前以 Mac 版 Microsoft Word 导出的 PDF 作为主要对照基准，对修复前后的字体、文字位置、换行和分页进行比较。复杂文档仍可能存在布局差异，兼容性工作会持续推进。
 
-这些目录是开发骨架，尚未实现 WOPI、部署服务或执行功能测试。
+## 项目组成
 
-## 上游同步
+| 仓库 | 职责 |
+| --- | --- |
+| [cocolian-office](https://github.com/cocolian/cocolian-office) | 开发工作区、源码版本组织、构建部署配置和项目文档 |
+| [online.mirror](https://github.com/cocolian/online.mirror) | 基于 Collabora 的在线编辑服务及配套渲染引擎，承载主要排版修复 |
+| [cocolian](https://github.com/cocolian/cocolian) | 文档门户、WOPI Host 及业务接入 |
+| [office-core](https://github.com/cocolian/office-core) | LibreOffice core 源码工作区 |
+| [collabora-online-sdk-examples](https://github.com/cocolian/collabora-online-sdk-examples) | 在线文档集成示例 |
 
-执行 `./scripts/sync-upstream.sh` 仅拉取 upstream，不修改工作树、不推送 Fork。
+本仓库通过 Git submodule 记录相关源码版本；主要渲染修复位于 `src/online.mirror/engine`。具体源码来源见 [repos.json](repos.json)。
 
-在工作树干净时，以 office-core 为例：
-
-```bash
-cd src/office-core
-git switch master
-git merge --ff-only upstream/master
-# 检查并测试后，按需执行：
-git push origin master
-# 独立功能开发：
-git switch -c feature/your-change
-```
-
-online.mirror 使用 main，其余两个仓库使用 master。若 fast-forward 失败，先检查双方提交差异，再决定合并方案；不自动 rebase 或强制推送。每个仓库配置 pull.ff=only、fetch.prune=true 和 remote.pushDefault=origin。upstream 的 push URL 被禁用以防误推。
-
-## 后续验证
-
-先用官方容器建立运行基线，再准备源码编译依赖。远程部署前检查服务器资源、Ingress、TLS 与存储；在线编辑/保存、双客户端协同及格式转换需在真实服务部署后验证。许可证和商用条件应按具体版本另行核查。
-
-## 全源码构建
-
-本次构建与发布说明见 [docs/development/source-build.md](docs/development/source-build.md)。源码编译与打包已完成，2026-10-16 已推送 registry.example.invalid 并发布 office-lab；结果和限制见 docs/development/source-release-20261016.md。
-
-## 本机开发（2026-10-18 迁移）
-
-工作目录：`<workspace>/cocolian-office`。门户源码位于同级 `../cocolian`。
+## 开始开发
 
 ```bash
-git clone git@github.com:cocolian/cocolian-office.git
+git clone https://github.com/cocolian/cocolian-office.git
 cd cocolian-office
 ./scripts/setup-dev.sh
 ```
 
-`repos.json` 和 Git submodule 记录迁移时的精确提交；setup-dev.sh 只初始化这三个源码仓库，不递归下载引擎内部的附加子模块。首次完整检出锁定版本源码，并使用浅克隆减少历史下载；需要完整历史时在对应源码仓库执行 `git fetch --unshallow origin`。源码构建仍需 Linux 环境；Mac 用于编辑、提交和本地可用的验证。构建镜像、缓存、凭据和运行数据不随源码迁移。原服务器工作目录保留。
+`setup-dev.sh` 初始化锁定版本的源码仓库。完整源码检出和首次构建可能需要较长时间；需要完整历史时，在对应浅克隆仓库执行 `git fetch --unshallow origin`。
 
-中文翻译源码另用 `./scripts/setup-translations.sh` 恢复到引擎的 `engine/translations`（上游提交 `17fb3698d5e86169d44076f7a992c572f8f780f1`，仅检出 `source/zh-CN`）。服务器的两份未提交翻译修改已逐字核对，与已提交补丁 `patches/translations/zh-cn-native-commands.patch` 完全一致；恢复后在翻译仓库中显示为修改，这是补丁的预期状态。该官方仓库的推送已禁用。
+引擎源码构建使用 Linux 环境；Mac 可用于代码开发和 Word 渲染对照。构建说明见 [源码构建文档](docs/development/source-build.md)，容器配方见 [deploy/source-build](deploy/source-build/README.md)。这些文档包含历史构建记录，具体版本以当前代码和部署配置为准。
+
+第三方字体文件不随本仓库分发。部署时请提供有权使用的字体，并保持对照环境与服务端的字体版本一致。
+
+## 接入项目
+
+欢迎文档管理系统、知识库、业务平台和其他应用接入 Cocolian Office。可以通过 WOPI 对接文档打开、编辑与保存，也可以通过转换接口集成 DOCX 转 PDF。
+
+接入实现与接口说明见 [文档门户仓库](https://github.com/cocolian/cocolian)；现有在线入口为 [office.example.invalid](https://office.example.invalid/)，当前运行的是受控验证环境。欢迎通过项目仓库联系维护者，交流接入需求、部署方式和兼容性问题。
+
+## 参与贡献
+
+欢迎贡献排版修复、测试、文档和系统集成。反馈渲染差异时，请说明字体、Word 版本、页面设置和复现步骤，优先提供可公开的最小合成案例。
+
+真实业务文档、私有字体、生成的 PDF、构建产物和凭据应保存在仓库外。提交前请检查文件名及内容，确保具备公开权限。
+
+## 捐款支持
+
+欢迎为本项目捐款，支持中文排版兼容性开发、回归测试和构建资源。也欢迎提供算力、测试环境、代码贡献或集成反馈。
+
+欢迎捐款支持，可通过 [GitHub Issue](https://github.com/cocolian/online.mirror/issues) 联系项目维护者。支持项目不影响按许可证免费使用开源代码。
+
+## 开源许可与上游
+
+感谢 LibreOffice、Collabora Online 及其社区。本项目的相关源码保留上游许可证和版权声明；使用、修改和分发时，请遵守各组件目录中的许可文件。渲染源码仓库的许可证入口见 [COPYING](https://github.com/cocolian/online.mirror/blob/main/COPYING)。
+
+项目介绍与媒体文案见 [项目介绍文章](https://github.com/cocolian/online.mirror/blob/main/cocolian/office-lab/docs/community/introduction-zh.md) 和 [社交媒体文案](https://github.com/cocolian/online.mirror/blob/main/cocolian/office-lab/docs/community/social-posts.md)。
+
+## English
+
+Cocolian Office is an open source cloud document platform built on LibreOffice and Collabora Online. We focus on Chinese document rendering, aiming for the closest possible fidelity to Microsoft Word across online editing, preview and PDF conversion. The project can be used and integrated free of charge under the applicable component licenses. Contributions, integrations and donations are welcome.
